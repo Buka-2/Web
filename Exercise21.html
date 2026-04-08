@@ -45,4 +45,42 @@
         display: inline-block; /* 關鍵：作為行內元素，但可設定邊框與背景 */
         background-color: #FFFF00; /* 黃色背景 */
         border: 1px solid #0000FF; /* 藍色邊框 */
-        padding: 0 4px; /* 上下0
+        padding: 0 4px; /* 上下0，左右加一點點 padding 讓文字不貼邊 */
+        margin: 0 2px; /* 左右與其他文字留一點距離 */
+        vertical-align: middle; /* 讓黃色區塊與周圍文字垂直對齊 */
+    }
+
+    /* 為了讓 float 的效果明顯，需要夠長的文字 */
+    .poem-text {
+        line-height: 1.6;
+        color: #333;
+        margin: 0;
+    }
+</style>
+</head>
+<body>
+
+<div class="main-container">
+    
+    <div class="float-div">
+        A float div with overflow auto. A float div with overflow auto. 
+        Here is more text to make it scroll. Here is more text to make it scroll.
+    </div>
+
+    <p class="poem-text">
+        (Just long sentence.) Let me not to the marriage of true minds Admit impediments. 
+        <span class="inline-block-highlight">Love</span> 
+        is not love Which alters when it alteration finds, Or bends with the remover to remove: 
+        O, no! it is an ever-fix`ed mark, That looks on tempests and is never shaken; 
+        It is the star to every wand'ring bark, Whose worth's unknown, although his height be taken. 
+        <span class="inline-block-highlight">Love's</span> 
+        not Time's fool, though rosy lips and cheeks Within his bending sickle's compass come; 
+        <span class="inline-block-highlight">Love</span> 
+        alters not with his brief hours and weeks, But bears it out even to the edge of doom: 
+        If this be error and upon me proved, I never writ, nor no man ever loved.
+    </p>
+
+</div>
+
+</body>
+</html>
