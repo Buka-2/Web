@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS 佈局練習</title>
+<style>
+    body {
+        font-family: serif; /* 使用襯線字體，更貼近原圖詩句的氛圍 */
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    /* 主容器：設定白色背景、邊框、陰影和寬度 */
+    .main-container {
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+        width: 650px; /* 根據需要調整 */
+        padding: 20px;
+        position: relative;
+    }
+
+    /* 右側浮動區塊 (滿足條件：A float div with overflow auto) */
+    .float-div {
+        float: right; /* 關鍵：向右浮動 */
+        width: 150px;
+        height: 150px;
+        border: 4px solid #73AD21; /* 綠色粗邊框 */
+        margin-left: 15px; /* 與左側文字保持距離 */
+        margin-bottom: 10px;
+        padding: 10px;
+        overflow-y: auto; /* 關鍵：垂直內容過多時顯示捲軸 */
+        box-sizing: border-box; /* 確保 padding 和 border 不會撐大外框 */
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* 行內塊級區塊 (滿足條件：Some inline-blocks) */
+    .inline-block-highlight {
+        display: inline-block; /* 關鍵：作為行內元素，但可設定邊框與背景 */
+        background-color: #FFFF00; /* 黃色背景 */
+        border: 1px solid #0000FF; /* 藍色邊框 */
+        padding: 0 4px; /* 上下0
