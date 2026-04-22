@@ -62,15 +62,27 @@
             height: 40px;
         }
 
-        /* --- 響應式關鍵：當寬度小於 480px 時 --- */
+       /* --- 響應式關鍵：當寬度小於 480px 時 --- */
         @media screen and (max-width: 480px) {
-            .row-teal, .row-grey {
-                flex-direction: column; /* 改為直排 (a圖) */
+            /* 藍綠色區塊：依然維持一列一個 */
+            .row-teal {
+                flex-direction: column;
             }
-            
-            /* (a圖) 中間藍綠色區塊在直排時稍微變矮一點比較好看，可視需求調整 */
             .row-teal .box {
                 height: 50px;
+            }
+
+            /* 灰色區塊：改為 2x2 排列 */
+            .row-grey {
+                flex-wrap: wrap; /* 允許換行 */
+                flex-direction: row; /* 保持橫向排列以便換行 */
+                justify-content: space-between; /* 讓方塊左右貼齊 */
+            }
+            .row-grey .box {
+                /* 計算寬度：50% 減去 gap 的一半 */
+                flex: 0 0 calc(50% - 5px); 
+                height: 40px;
+                margin-bottom: 0px; /* 視情況調整間距 */
             }
         }
     </style>
