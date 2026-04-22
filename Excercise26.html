@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Image Styling Practice</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 50px;
+            font-family: sans-serif;
+        }
+
+        /* 共用設定 */
+        img {
+            height: 300px; /* 固定高度為 300px */
+        }
+
+        /* 左側圖片：寬度 33%、圓角 18px、無變形 */
+        .img-left {
+            width: 33%;
+            border-radius: 18px;
+            object-fit: cover; /* 關鍵：確保不失真/不壓縮 */
+        }
+
+        /* 中間圖片：150x150 圓形、無變形、外框 */
+        .img-center {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* 圓形 */
+            border: 2px solid #333; /* 加上框線讓圓形更明顯 */
+            object-fit: cover; /* 關鍵：確保不失真 */
+        }
+
+        /* 右側圖片：寬度 33%、有變形 */
+        .img-right {
+            width: 33%;
+            /* 預設情況下，若只給 width/height 而不加 object-fit，圖片會被拉伸(Distortion) */
+            object-fit: fill; 
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://picsum.photos/id/43/800/800" alt="Paris" class="img-left">
+
+    <img src="https://picsum.photos/id/10/800/800" alt="Mountain" class="img-center">
+
+    <img src="https://picsum.photos/id/43/800/800" alt="Paris" class="img-right">
+
+</body>
+</html>
