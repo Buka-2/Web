@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Layout Practice</title>
+    <style>
+        /* 基本頁面設定 */
+        body {
+            background-color: #58ACFA; /* 藍色背景 */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* 白色容器 */
+        .container {
+            background-color: white;
+            width: 90%;
+            max-width: 600px;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* 共用方塊樣式 */
+        .box {
+            border-radius: 4px;
+            min-height: 60px;
+        }
+
+        /* 綠色頂部 */
+        .header {
+            background-color: #A2D149;
+            height: 100px;
+        }
+
+        /* 藍綠色區塊容器 */
+        .row-teal {
+            display: flex;
+            flex-direction: row; /* 預設橫排 (b圖) */
+            gap: 10px;
+        }
+        .row-teal .box {
+            background-color: #00BCC9;
+            flex: 1; /* 均分寬度 */
+            height: 80px;
+        }
+
+        /* 灰色底部區塊容器 */
+        .row-grey {
+            display: flex;
+            flex-direction: row; /* 預設橫排 (b圖) */
+            gap: 10px;
+        }
+        .row-grey .box {
+            background-color: #EEEEEE;
+            flex: 1;
+            height: 40px;
+        }
+
+        /* --- 響應式關鍵：當寬度小於 480px 時 --- */
+        @media screen and (max-width: 480px) {
+            .row-teal, .row-grey {
+                flex-direction: column; /* 改為直排 (a圖) */
+            }
+            
+            /* (a圖) 中間藍綠色區塊在直排時稍微變矮一點比較好看，可視需求調整 */
+            .row-teal .box {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="box header"></div>
+
+        <div class="row-teal">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+
+        <div class="row-grey">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+    </div>
+
+</body>
+</html>
