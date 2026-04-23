@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>圖片檢視器</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e8e8e8;
+      font-family: 'Roboto', sans-serif;
+      font-size: 13px;
+      color: #2f2f2f;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .viewer-card {
+      background: #ffffff;
+      border: 1px solid #d0d0d0;
+      width: 496px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    }
+
+    /* ── Header ── */
+    .viewer-header {
+      background: #f6f6f6;
+      border-bottom: 1px solid #eaeaea;
+      padding: 0 15px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-title {
+      font-size: 13px;
+      color: #2f2f2f;
+      font-weight: 500;
+    }
+
+    /* ── "查看資訊" button ── */
+    .btn-info {
+      height: 22px;
+      padding: 0 10px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #2f2f2f;
+      font-family: 'Roboto', sans-serif;
+      font-size: 13px;
+      color: #2f2f2f;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+      line-height: 20px;
+    }
+    .btn-info:hover { background: #f0f0f0; }
+
+    /* ── Image preview ── */
+    .image-wrapper {
+      padding: 20px 26px 20px 20px;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+    }
+
+    .preview-image-placeholder {
+      width: 450px;
+      height: 240px;
+      background: linear-gradient(135deg, #d4b896 0%, #c4945a 40%, #8b6340 60%, #5c3e28 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .placeholder-label {
+      background: rgba(255,255,255,0.75);
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    /* ── Detail panel ── */
+    .detail-panel {
+      background: #f3f3f3;
+      border-top: 1px solid #eaeaea;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease;
+    }
+    .detail-panel.open { max-height: 300px; }
+
+    .detail-header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 8px 12px 4px;
+    }
+
+    /* ── "收起資訊" button ── */
+    .btn-collapse {
+      height: 22px;
+      padding: 0 10px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #2f2f2f;
+      font-family: 'Roboto', sans-serif;
+      font-size: 13px;
+      color: #2f2f2f;
+      cursor: pointer;
+      transition: background 0.15s;
+      line-height: 20px;
+    }
+    .btn-collapse:hover { background: #f0f0f0; }
+
+    /* ── Info rows ── */
+    .detail-rows { padding: 4px 12px 14px; }
+
+    .detail-row {
+      display: flex;
+      align-items: center;
+      height: 28px;
+      border-bottom: 1px solid #eaeaea;
+      background: #e8f3ff;
+      border-left: 3px solid #0084ff;
+      padding: 0 10px;
+      margin-bottom: 2px;
+    }
+    .detail-row:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .detail-label {
+      color: #707070;
+      font-size: 13px;
+      width: 70px;
+      flex-shrink: 0;
+    }
+
+    .detail-value {
+      color: #2f2f2f;
+      font-size: 13px;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .detail-value.accent { color: #0084ff; }
+  </style>
+</head>
+<body>
+
+<div class="viewer-card">
+
+  <!-- Header -->
+  <div class="viewer-header">
+    <span class="header-title">預覽</span>
+    <button class="btn-info" id="btnInfo" onclick="toggleInfo()">查看資訊</button>
+  </div>
+
+  <!-- Image -->
+  <div class="image-wrapper">
+    <div class="preview-image-placeholder">
+      <!-- 換成真實圖片時改為： -->
+      <!-- <img src="your-image.jpg" style="width:450px;height:240px;object-fit:cover;" alt="預覽圖片"> -->
+      <span class="placeholder-label">預覽圖片範圍 450 × 240</span>
+    </div>
+  </div>
+
+  <!-- Detail panel -->
+  <div class="detail-panel" id="detailPanel">
+    <div class="detail-header">
+      <button class="btn-collapse" onclick="toggleInfo()">收起資訊</button>
+    </div>
+    <div class="detail-rows">
+      <div class="detail-row">
+        <span class="detail-label">修改日期</span>
+        <span class="detail-value">2017/10/12</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">格式</span>
+        <span class="detail-value">JPG</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">大小</span>
+        <span class="detail-value accent">466.97 KB</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">路徑</span>
+        <span class="detail-value" title="\designcenter\gnap.com.tw\DesignCenter\PM\AD 請告\WEBN...">
+          \designcenter\gnap.com.tw\DesignCenter\PM\AD 請告\WEBN...
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function toggleInfo() {
+    const panel = document.getElementById('detailPanel');
+    const isOpen = panel.classList.contains('open');
+    if (isOpen) {
+      panel.classList.remove('open');
+    } else {
+      panel.classList.add('open');
+    }
+  }
+</script>
+
+</body>
+</html>
+
