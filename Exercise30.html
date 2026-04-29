@@ -2,23 +2,22 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>JavaScript 循環互動練習</title>
     <style>
         .container {
             border: 1px solid #ccc;
             padding: 20px;
-            width: 250px;
+            width: 200px;
             text-align: center;
-            font-family: "Times New Roman", Times, serif;
+            font-family: Arial, sans-serif;
         }
         #text {
-            font-size: 32px;
+            font-size: 24px;
             margin-bottom: 20px;
-            color: black; /* 初始顏色 */
+            color: black;
+            transition: 0.3s; /* 讓顏色變換更平滑 */
         }
         button {
-            padding: 8px 20px;
-            font-size: 18px;
+            padding: 5px 15px;
             cursor: pointer;
         }
     </style>
@@ -26,34 +25,31 @@
 <body>
 
     <div class="container">
-        <p id="text">Hello</p>
+        <div id="text">Hello</div>
         <button id="myButton">Button</button>
     </div>
 
     <script>
         const textElement = document.getElementById('text');
         const btn = document.getElementById('myButton');
-        
-        let status = 0; // 用來記錄目前在第幾個狀態 (0, 1, 2)
 
-        btn.onclick = function() {
-            // 每次點擊，狀態加 1 並對 3 取餘數，確保 status 永遠在 0~2 之間循環
-            status = (status + 1) % 3;
-
-            if (status === 0) {
-                // 第一個狀態：黑色 Hello
-                textElement.innerHTML = 'Hello';
-                textElement.style.color = 'black';
-            } else if (status === 1) {
-                // 第二個狀態：粉色 Hello
-                textElement.innerHTML = 'Hello';
-                textElement.style.color = 'magenta';
-            } else if (status === 2) {
-                // 第三個狀態：粉色 Mouse Click
-                textElement.innerHTML = 'Mouse Click';
-                textElement.style.color = 'magenta';
-            }
+        // 1. Mouse over: 變顏色 (Hello 變粉紅色)
+        btn.onmouseover = function() {
+            textElement.style.color = 'magenta';
         };
+
+        // 2. Mouse click: 變文字與顏色 (變成 Mouse Click)
+        btn.onclick = function() {
+            textElement.innerHTML = 'Mouse Click';
+            textElement.style.color = 'magenta';
+        };
+
+        // 3. Mouse out: (選配) 如果滑鼠移開要變回黑色，可以加上這段
+        /*
+        btn.onmouseout = function() {
+            textElement.style.color = 'black';
+        };
+        */
     </script>
 
 </body>
