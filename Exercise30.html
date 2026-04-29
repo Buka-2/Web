@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>互動網頁練習</title>
+    <style>
+        .container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #text {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: black;
+            transition: 0.3s; /* 讓顏色變換更平滑 */
+        }
+        button {
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="text">Hello</div>
+        <button id="myButton">Button</button>
+    </div>
+
+    <script>
+        const textElement = document.getElementById('text');
+        const btn = document.getElementById('myButton');
+
+        // 1. Mouse over: 變顏色 (Hello 變粉紅色)
+        btn.onmouseover = function() {
+            textElement.style.color = 'magenta';
+        };
+
+        // 2. Mouse click: 變文字與顏色 (變成 Mouse Click)
+        btn.onclick = function() {
+            textElement.innerHTML = 'Mouse Click';
+            textElement.style.color = 'magenta';
+        };
+
+        // 3. Mouse out: (選配) 如果滑鼠移開要變回黑色，可以加上這段
+        /*
+        btn.onmouseout = function() {
+            textElement.style.color = 'black';
+        };
+        */
+    </script>
+
+</body>
+</html>
