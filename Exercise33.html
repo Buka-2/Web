@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>表單驗證練習</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #message { margin-top: 15px; font-weight: bold; height: 1.2em; }
+    </style>
+</head>
+<body>
+
+    <p>Please input a number between 150 and 300:</p>
+    
+    <input id="numInput" type="text">
+    <button onclick="validateForm()">Submit</button>
+
+    <p id="message"></p>
+
+    <script>
+        function validateForm() {
+            // 1. 抓取輸入框的值並轉換成數字
+            let x = document.getElementById("numInput").value;
+            let msg = document.getElementById("message");
+            
+            // 2. 判斷邏輯
+            if (isNaN(x) || x === "") {
+                msg.innerHTML = "Not a number";
+            } else if (x < 150) {
+                msg.innerHTML = "Value too small";
+            } else if (x > 300) {
+                msg.innerHTML = "Value too large";
+            } else {
+                msg.innerHTML = "Input OK";
+            }
+        }
+    </script>
+
+</body>
+</html>
