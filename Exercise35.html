@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Object Property Manipulation</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
-        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
-        .section { margin-bottom: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; padding: 20px; color: #333; }
+        pre { background: #f8f9fa; padding: 15px; border: 1px solid #ddd; border-radius: 5px; overflow-x: auto; }
+        .section { margin-bottom: 30px; }
+        .label { font-weight: bold; color: #0056b3; display: block; margin-bottom: 5px; }
     </style>
 </head>
 <body>
@@ -14,17 +15,18 @@
     <h2>JavaScript Object Manipulation</h2>
 
     <div class="section">
-        <strong>1. Original Properties:</strong>
-        <pre id="original-props"></pre>
+        <span class="label">1. List of All Original Properties:</span>
+        <!-- 使用 div 來接收換行後的屬性清單 -->
+        <div id="original-props-list" style="background: #f0f7ff; padding: 10px; border-left: 5px solid #0056b3;"></div>
     </div>
 
     <div class="section">
-        <strong>2. Object After Deleting 'age':</strong>
-        <pre id="final-object"></pre>
+        <span class="label">2. Object Content After Deleting 'age':</span>
+        <pre id="final-object-display"></pre>
     </div>
 
     <script>
-        // Sample object from image_3b2b19.png
+        // 來自 image_3b2b19.png 的範例物件
         var Person = {
             firstName : "Tony",
             lastName : "Lee",
@@ -32,19 +34,22 @@
             eyeColor : "Blue"
         };
 
-        // 1. List all properties
-        var properties = Object.keys(Person).join(", ");
-        document.getElementById('original-props').textContent = properties;
+        // --- 步驟 1: 列出所有屬性並換行 ---
+        var allKeys = Object.keys(Person);
+        var listElement = document.getElementById('original-props-list');
+        
+        // 使用 join('<br>') 確保在網頁上每一項都換行顯示
+        listElement.innerHTML = allKeys.join('<br>');
 
-        // 2. Delete the age property
+        // --- 步驟 2: 刪除 age 屬性 ---
         delete Person.age;
 
-        // 3. Print the object after deleting the property
-        // Using JSON.stringify for a readable string format
-        document.getElementById('final-object').textContent = JSON.stringify(Person, null, 4);
+        // --- 步驟 3: 顯示刪除後的物件狀態 ---
+        // JSON.stringify 的第三個參數 '4' 代表縮排空格數，確保顯示格式漂亮
+        document.getElementById('final-object-display').textContent = JSON.stringify(Person, null, 4);
         
-        // Log to console as requested by "print the object"
-        console.log("Updated Person Object:", Person);
+        // 同時輸出至控制台供檢查
+        console.log("Final Person Object:", Person);
     </script>
 </body>
 </html>
