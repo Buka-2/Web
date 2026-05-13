@@ -2,60 +2,51 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>物件屬性操作展示</title>
+    <title>Object Manipulation</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.8; padding: 20px; background-color: #fafafa; }
-        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h2 { border-bottom: 2px solid #333; padding-bottom: 10px; }
-        .section { margin-top: 20px; padding: 10px; border-left: 4px solid #2196F3; background: #e3f2fd; }
-        pre { background: #333; color: #fff; padding: 15px; border-radius: 5px; }
-        b { color: #d32f2f; }
+        body { font-family: monospace; line-height: 1.5; padding: 20px; color: #000; background: #fff; }
+        .section { margin-bottom: 30px; }
+        .title { font-weight: bold; margin-bottom: 10px; display: block; }
+        pre { margin: 0; white-space: pre-wrap; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>JavaScript 物件操作 (依據 image_3b2b19.png)</h2>
-
     <div class="section">
-        <strong>1. 原始所有屬性與值 (Original Properties & Values):</strong>
+        <span class="title">1. Original Properties & Values:</span>
         <div id="original-display"></div>
     </div>
 
+    <hr>
+
     <div class="section">
-        <strong>2. 刪除「age」屬性後的物件:</strong>
+        <span class="title">2. Object after deleting 'age':</span>
         <pre id="deleted-display"></pre>
     </div>
-</div>
 
-<script>
-    // 1. 定義原始物件
-    var Person = {
-        firstName : "Tony",
-        lastName : "Lee",
-        age : 50,
-        eyeColor : "Blue"
-    };
+    <script>
+        // 原始物件
+        var Person = {
+            firstName: "Tony",
+            lastName: "Lee",
+            age: 50,
+            eyeColor: "Blue"
+        };
 
-    // --- 步驟 A: 顯示所有原始屬性與其內容，並確保換行 ---
-    var originalDiv = document.getElementById('original-display');
-    var content = "";
-    
-    // 使用 for...in 迴圈遍歷物件，抓取屬性名與屬性值
-    for (var key in Person) {
-        content += "屬性: <b>" + key + "</b>, 值: <b>" + Person[key] + "</b><br>";
-    }
-    originalDiv.innerHTML = content;
+        // 1. 顯示原始所有屬性與值 (僅保留 Key: Value)
+        var originalDiv = document.getElementById('original-display');
+        var content = "";
+        for (var key in Person) {
+            content += key + ": " + Person[key] + "<br>";
+        }
+        originalDiv.innerHTML = content;
 
-    // --- 步驟 B: 刪除 age 屬性 ---
-    delete Person.age;
+        // 2. 刪除 age 屬性
+        delete Person.age;
 
-    // --- 步驟 C: 顯示刪除後的物件 ---
-    document.getElementById('deleted-display').textContent = JSON.stringify(Person, null, 4);
-
-    // 同步列印到控制台
-    console.log("刪除後的物件:", Person);
-</script>
+        // 3. 顯示刪除後的物件 (純文字格式)
+        document.getElementById('deleted-display').textContent = JSON.stringify(Person, null, 4);
+    </script>
 
 </body>
 </html>
