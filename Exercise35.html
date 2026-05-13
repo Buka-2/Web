@@ -1,55 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>Object Property Manipulation</title>
+    <title>物件屬性操作展示</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; padding: 20px; color: #333; }
-        pre { background: #f8f9fa; padding: 15px; border: 1px solid #ddd; border-radius: 5px; overflow-x: auto; }
-        .section { margin-bottom: 30px; }
-        .label { font-weight: bold; color: #0056b3; display: block; margin-bottom: 5px; }
+        body { font-family: sans-serif; line-height: 1.8; padding: 20px; background-color: #fafafa; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 2px solid #333; padding-bottom: 10px; }
+        .section { margin-top: 20px; padding: 10px; border-left: 4px solid #2196F3; background: #e3f2fd; }
+        pre { background: #333; color: #fff; padding: 15px; border-radius: 5px; }
+        b { color: #d32f2f; }
     </style>
 </head>
 <body>
 
-    <h2>JavaScript Object Manipulation</h2>
+<div class="container">
+    <h2>JavaScript 物件操作 (依據 image_3b2b19.png)</h2>
 
     <div class="section">
-        <span class="label">1. List of All Original Properties:</span>
-        <!-- 使用 div 來接收換行後的屬性清單 -->
-        <div id="original-props-list" style="background: #f0f7ff; padding: 10px; border-left: 5px solid #0056b3;"></div>
+        <strong>1. 原始所有屬性與值 (Original Properties & Values):</strong>
+        <div id="original-display"></div>
     </div>
 
     <div class="section">
-        <span class="label">2. Object Content After Deleting 'age':</span>
-        <pre id="final-object-display"></pre>
+        <strong>2. 刪除「age」屬性後的物件:</strong>
+        <pre id="deleted-display"></pre>
     </div>
+</div>
 
-    <script>
-        // 來自 image_3b2b19.png 的範例物件
-        var Person = {
-            firstName : "Tony",
-            lastName : "Lee",
-            age : 50,
-            eyeColor : "Blue"
-        };
+<script>
+    // 1. 定義原始物件
+    var Person = {
+        firstName : "Tony",
+        lastName : "Lee",
+        age : 50,
+        eyeColor : "Blue"
+    };
 
-        // --- 步驟 1: 列出所有屬性並換行 ---
-        var allKeys = Object.keys(Person);
-        var listElement = document.getElementById('original-props-list');
-        
-        // 使用 join('<br>') 確保在網頁上每一項都換行顯示
-        listElement.innerHTML = allKeys.join('<br>');
+    // --- 步驟 A: 顯示所有原始屬性與其內容，並確保換行 ---
+    var originalDiv = document.getElementById('original-display');
+    var content = "";
+    
+    // 使用 for...in 迴圈遍歷物件，抓取屬性名與屬性值
+    for (var key in Person) {
+        content += "屬性: <b>" + key + "</b>, 值: <b>" + Person[key] + "</b><br>";
+    }
+    originalDiv.innerHTML = content;
 
-        // --- 步驟 2: 刪除 age 屬性 ---
-        delete Person.age;
+    // --- 步驟 B: 刪除 age 屬性 ---
+    delete Person.age;
 
-        // --- 步驟 3: 顯示刪除後的物件狀態 ---
-        // JSON.stringify 的第三個參數 '4' 代表縮排空格數，確保顯示格式漂亮
-        document.getElementById('final-object-display').textContent = JSON.stringify(Person, null, 4);
-        
-        // 同時輸出至控制台供檢查
-        console.log("Final Person Object:", Person);
-    </script>
+    // --- 步驟 C: 顯示刪除後的物件 ---
+    document.getElementById('deleted-display').textContent = JSON.stringify(Person, null, 4);
+
+    // 同步列印到控制台
+    console.log("刪除後的物件:", Person);
+</script>
+
 </body>
 </html>
